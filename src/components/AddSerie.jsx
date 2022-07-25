@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({ key, left, right, onChange, biside = false, disabled = false }) => {
-    const onFormChange = ev => {
+export default ({ left, right, onChange, biside = false, disabled = false }) => {
+    const onRepsChange = ev => {
         onChange({
             type: ev.target.name,
             value: ev.target.value,
@@ -9,15 +9,15 @@ export default ({ key, left, right, onChange, biside = false, disabled = false }
     };
 
 
-    return <form className={biside && 'form-inline'} onChange={onFormChange}>
+    return <div className={`${biside && 'form-inline'} control`}>
         <input
             placeholder={biside ? 'Left' : 'Reps'}
             disabled={disabled}
-            key={key}
             name='left'
+            onChange={onRepsChange}
             type='number'
             value={left} />
         
-        { biside && <input placeholder={'Right'} disabled={disabled} type='number' name='right' key={`right-${key}`} value={right} />}
-    </form>
+        { biside && <input onChange={onRepsChange} placeholder={'Right'} disabled={disabled} type='number' name='right' value={right} />}
+    </div>
 };

@@ -67,7 +67,7 @@ export default ({ onNew }) => {
 
     return <section className='create-new-set'>
         <h2>Registrar nuevo set</h2>
-        <form>
+        <form className="control">
             <input
                 placeholder='Exercise name'
                 type='text'
