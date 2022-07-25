@@ -1,0 +1,127 @@
+@font-face {
+    font-family: roboto;
+    src: url('./roboto.ttf');
+}
+
+.container {
+    font-family: roboto;
+    display: grid;
+    grid-template-columns: auto 940 auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+        ". logo ."
+        ". create ."
+        ". sets .";
+}
+
+.logo {
+    grid-area: logo;
+    justify-self: center;
+}
+
+.create-new-set {
+    padding: 0.625rem;
+    grid-area: create;
+    border: 0.0625rem solid #A3A3A0;
+    margin-bottom: 0.625rem;
+    justify-self: center;
+    width: 23rem;
+
+}
+
+.your-sets {
+    padding: 0.625rem;
+    grid-area: sets;
+    border: 0.0625rem solid #A3A3A0;
+    background-color: #F4F5F2;
+}
+
+.exercise {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.exercise.name {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+form input {
+    height: 2rem;
+    margin-bottom: 1rem;
+
+}
+
+/* form input:focus {
+    outline: none;
+
+} */
+
+form input[placeholder="title"],
+form input[placeholder="description"] {
+    padding: 0 .5rem;
+}
+
+
+.cc-selector input{
+    margin:0;padding:5px;
+    appearance:none;
+}
+
+.visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+
+.happy {
+    background-image: url('./happy.png');
+}
+
+.sad {
+    background-image: url('./sad.png');
+}
+
+.none {
+    background-image: url('./none.png');
+}
+
+.angry {
+    background-image: url('./angry.png');
+}
+
+/* .cc-selector input:active +.drinkcard-cc{opacity: .9;} */
+.cc-selector {
+    text-align: center;
+    margin-top: 15px;
+}
+.cc-selector input:checked + .emoji.drinkcard-cc{
+    filter: none;
+}
+
+.emoji {
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:55px;
+    height:70px;
+}
+
+.emoji.drinkcard-cc{
+    cursor:pointer;
+    transition: all 100ms ease-in;
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+.emoji.drinkcard-cc:hover{
+    filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
