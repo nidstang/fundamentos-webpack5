@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Series from './Series';
 import SelectMood from './SelectMood';
-// import SaveButton from 'ts-loader?!./SaveButton';
-import SaveButton from './SaveButton';
 
 const Side = (right, left) => ({ right, left });
 
@@ -29,7 +27,6 @@ export default ({ onNew }) => {
         ev.preventDefault();
         updateSetsInfo({...setsInfo, [count + 1]: Side.empty() });
         setCount(c => c + 1);
-        // throw new Error('Broken');
     };
 
     const onNewSet = ev => {
@@ -86,8 +83,6 @@ export default ({ onNew }) => {
             <button onClick={onAddSet}>Add set</button>
 
             <SelectMood id='Register' selected={mood} onSelect={onSelectMood} />
-            <SaveButton onSave={onNewSet} />
         </form>
     </section>
 };
-                //return <AddSerie key={i} value={setsInfo[key].value} onChange={value => updateSetsInfo({ ...setsInfo, [key]: { value, side: setsInfo[key].side }})} />

@@ -1,9 +1,18 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import TosetApp from './TosetApp.jsx';
+import data from './data.json';
+const hello = (name) => `Hello ${name}`;
 
-const root = document.createElement('div');
+console.log(hello('World'));
+console.log(hello('OW'));
 
-document.body.appendChild(root);
+class Test {
+    greet() {
+        return 'hello world'
+    }
 
-createRoot(root).render(<TosetApp />);
+}
+
+const a = new Test();
+
+console.log(a.greet());
+
+console.log('JSON', data);
