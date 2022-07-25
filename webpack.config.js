@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HashInfoPlugin = require('./plugins/HashInfoPlugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+
+const package = require('./package.json');
 
 module.exports = (env) => ({
     entry: path.resolve(__dirname, 'src', 'index.js'),
@@ -118,6 +121,28 @@ module.exports = (env) => ({
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),
+
+        new ModuleFederationPlugin({
+            name: 'toset',
+            filename: 'remoteEntry.js',
+            exposes: {
+                Register: './src/components/Register.jsx'
+            },
+
+            shared: {
+                react: {
+                    eager: true,
+                    singleton: true,
+                    requiredVersion: package.dependencies.react,
+                },
+
+                'react-dom': {
+                    eager: true,
+                    singleton: true,
+                    requiredVersion: package.dependencies['react-dom'],
+                }
+            }
+        })
 
         // new HashInfoPlugin({
         //     fileName: 'data.json',
