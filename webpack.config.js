@@ -1,7 +1,12 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: path.resolve('src', 'app.js'),
+
+    output: {
+        filename: 'main.[contenthash].js',
+    }, 
 
     module: {
         rules: [
@@ -43,5 +48,12 @@ module.exports = {
 
     resolve: {
         extensions: ['.js', '.jsx', '.tsx']
-    }
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'ToSet',
+            template: path.resolve('index.html'),
+        }),
+    ]
 };
