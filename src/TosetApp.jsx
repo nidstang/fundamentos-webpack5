@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from './components/Logo.jsx';
+// import Logo from './components/Logo.jsx';
 import Register from './components/Register.jsx';
 import YourSets from './components/YourSets.jsx';
 // import './assets/main.css';
@@ -16,7 +16,7 @@ export default () => {
 
     return (
         <div className='container'>
-            <Logo />
+            {/* <Logo /> */}
             <Register onNew={onNew} />
             <YourSets sets={sets} /> 
         </div>
