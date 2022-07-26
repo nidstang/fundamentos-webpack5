@@ -27,7 +27,17 @@ module.exports = {
                     'css-loader',
                     'sass-loader',
                 ],
-            }
+            },
+
+            {
+                test: /\.(ttf|png)$/,
+                type: 'asset' // asset/resource | asset/inline, asset. asset/source
+            },
+
+            {
+                test: /\.txt$/,
+                type: 'asset/source',
+            },
         ]
     },
 
