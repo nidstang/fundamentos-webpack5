@@ -15,4 +15,4 @@ const a = new Test();
 
 console.log(a.greet());
 
-console.log('JSON', data);
+console.log('JSO', data);
