@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Series from './Series';
 import SelectMood from './SelectMood';
+import SaveButton from './SaveButton';
+// import SaveButton from 'ts-loader?!./SaveButton';
 
 const Side = (right, left) => ({ right, left });
 
@@ -83,6 +85,7 @@ export default ({ onNew }) => {
             <button onClick={onAddSet}>Add set</button>
 
             <SelectMood id='Register' selected={mood} onSelect={onSelectMood} />
+            <SaveButton onSave={onNewSet} />
         </form>
     </section>
 };
