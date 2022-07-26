@@ -1,18 +1,23 @@
-import data from './data.json';
-const hello = (name) => `Hello ${name}`;
+// import data from './data.json';
+// import lodash from 'lodash';
+// import './assets/main.css';
+(function () {
+    const hello = (name) => `Hello ${name}`;
 
-console.log(hello('World'));
-console.log(hello('OW'));
+    console.log(hello('World'));
+    console.log(hello('OW'));
 
-class Test {
-    greet() {
-        return 'hello world'
+    class Test {
+        greet() {
+            return 'hello world'
+        }
+
     }
 
-}
+    const a = new Test();
 
-const a = new Test();
+    console.log(a.greet());
 
-console.log(a.greet());
+    console.log('JSON', data);
 
-console.log('JSON', data);
+})()
