@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
-module.exports = (_, argv) => {
+module.exports = (env, argv) => {
+    console.log(env);
     return {
         // mode: 'development', // none | development | production
         entry: path.resolve('src', 'app.js'),
