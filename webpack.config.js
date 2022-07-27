@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
-module.exports = (env) => ({
+module.exports = (env, argv) => ({
     entry: path.resolve(__dirname, 'src', 'index.js'),
     output: {
         filename: '[name].[contenthash].js',
@@ -16,9 +16,32 @@ module.exports = (env) => ({
 
             cacheGroups: {
                 vendors: {
+                    minSize: 1000, // el tamaño minimo para que se cree un chunk
                     name: 'vendors',
+                    priority: 1,
                     test: /[\\/]node_modules[\\/]/,
+                },
+
+                react: {
+                    name: 'react',
+                    priority: 2,
+                    test: /[\\/]node_modules[\\/](react|react-dom)/,
+                },
+
+                asyncModules: {
+                    minSize: 0,
+                    name: 'dynamic',
+                    priority: 3,
+                    chunks: 'async',
                 }
+
+                // react: {
+                //     name: 'react',
+                //     priority: 2,
+                //     test(module) {
+                //         return module.resource.includes('react');
+                //     }
+                // }
             }
         },
 
@@ -47,7 +70,7 @@ module.exports = (env) => ({
             {
                 test: /\.(css|scss)$/,
                 use: [
-                    env.pro ? MiniCssExtractPlugin.loader : 'style-loader',
+                    argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
                     'css-loader',
                     'sass-loader',
                 ]
