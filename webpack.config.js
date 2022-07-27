@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
 module.exports = {
     entry: path.resolve('src', 'app.js'),
@@ -65,6 +66,10 @@ module.exports = {
                     context: 'src/',
                 }
             ]
+        }),
+
+        new HashInfoPlugin({
+            debug: true
         }),
     ]
 };
