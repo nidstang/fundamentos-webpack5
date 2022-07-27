@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HashInfoPlugin = require('./plugins/HashInfoPlugin');
-const { ModuleFederationPlugin } = require('webpack').container;
 
 const package = require('./package.json');
 
@@ -129,29 +128,10 @@ module.exports = (env) => ({
         new ModuleFederationPlugin({
             name: 'toset',
             filename: 'remoteEntry.js',
-<<<<<<< module-federation
-            exposes: {
-                Register: './src/components/Register.jsx'
-            },
-
-            shared: {
-                react: {
-                    eager: true,
-                    singleton: true,
-                    requiredVersion: package.dependencies.react,
-                },
-
-                'react-dom': {
-                    eager: true,
-                    singleton: true,
-                    requiredVersion: package.dependencies['react-dom'],
-                }
-            }
-        })
-=======
 
             exposes: {
                 './Register': './src/components/Register.jsx',
+                './Styles': './src/styles.js',
             },
 
             shared: {
@@ -166,7 +146,6 @@ module.exports = (env) => ({
                 },
             },
         }),
->>>>>>> local
 
         // new HashInfoPlugin({
         //     fileName: 'data.json',

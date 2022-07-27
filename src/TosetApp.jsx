@@ -3,7 +3,8 @@ import Logo from './components/Logo.jsx';
 import Register from './components/Register.jsx';
 import YourSets from './components/YourSets.jsx';
 import './assets/styles.scss';
-import './assets/main.css';
+import './styles';
+// import './assets/main.css';
 
 export default () => {
 
