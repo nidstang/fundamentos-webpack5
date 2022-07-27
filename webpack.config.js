@@ -53,7 +53,13 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.jsx', '.tsx']
+        extensions: ['.js', '.jsx', '.tsx'],
+
+        alias: {
+            components: path.resolve('src', 'components'),
+            mood$: path.resolve('src', 'components', 'SelectMood.jsx'),
+        }
+
     },
 
     plugins: [

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Series from './Series';
-import SelectMood from './SelectMood';
+// import SelectMood from './SelectMood';
+// import SelectMood from 'components/SelectMood';
+import SelectMood from 'mood';
 import SaveButton from './SaveButton';
 // import SaveButton from 'ts-loader?!./SaveButton';
 
