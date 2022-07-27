@@ -1,4 +1,5 @@
 const path = require('path');
+const { ModuleFederationPlugin } = require('webpack').container;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -7,27 +8,30 @@ const { ModuleFederationPlugin } = require('webpack').container;
 
 const package = require('./package.json');
 
+const deps = require('./package.json').dependencies;
+
 module.exports = (env) => ({
-    entry: path.resolve(__dirname, 'src', 'index.js'),
+    entry: path.resolve(__dirname, 'src', 'bootstrap.js'),
     output: {
         filename: '[name].[contenthash].js',
+        publicPath: 'http://localhost:3000/'
     },
 
     optimization: {
-        splitChunks: {
-            chunks: 'all',
+        // splitChunks: {
+        //     chunks: 'all',
 
-            cacheGroups: {
-                vendors: {
-                    name: 'vendors',
-                    test: /[\\/]node_modules[\\/]/,
-                }
-            }
-        },
+        //     cacheGroups: {
+        //         vendors: {
+        //             name: 'vendors',
+        //             test: /[\\/]node_modules[\\/]/,
+        //         }
+        //     }
+        // },
 
-        runtimeChunk: {
-            name: 'runtime',
-        }
+        // runtimeChunk: {
+        //     name: 'runtime',
+        // }
     },
 
     module: {
@@ -125,6 +129,7 @@ module.exports = (env) => ({
         new ModuleFederationPlugin({
             name: 'toset',
             filename: 'remoteEntry.js',
+<<<<<<< module-federation
             exposes: {
                 Register: './src/components/Register.jsx'
             },
@@ -143,6 +148,25 @@ module.exports = (env) => ({
                 }
             }
         })
+=======
+
+            exposes: {
+                './Register': './src/components/Register.jsx',
+            },
+
+            shared: {
+                'react-dom': {
+                    singleton: true,
+                    requiredVersion: deps['react-dom'],
+                },
+
+                react: {
+                    singleton: true,
+                    requiredVersion: deps.react,
+                },
+            },
+        }),
+>>>>>>> local
 
         // new HashInfoPlugin({
         //     fileName: 'data.json',
