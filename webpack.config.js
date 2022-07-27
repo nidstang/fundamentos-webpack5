@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HashInfoPlugin = require('./plugins/HashInfoPlugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
 module.exports = {
     entry: path.resolve('src', 'app.js'),
@@ -10,6 +10,8 @@ module.exports = {
         filename: 'main.[contenthash].js',
     }, 
 
+    devtool: 'hidden-source-map',
+
     module: {
         rules: [
             {
@@ -17,7 +19,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-react'],
+                        presets: ['@babel/preset-react', '@babel/preset-env'],
                     }
                 }
             },
@@ -58,18 +60,18 @@ module.exports = {
             template: path.resolve('index.html'),
         }),
 
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: '*.txt', // default: output.path
-                    to: 'files/[name].[contenthash].txt',
-                    context: 'src/',
-                }
-            ]
-        }),
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //         {
+        //             from: '*.txt', // default: output.path
+        //             to: 'files/[name].[contenthash].txt',
+        //             context: 'src/',
+        //         }
+        //     ]
+        // }),
 
-        new HashInfoPlugin({
-            debug: true
-        }),
+        // new HashInfoPlugin({
+        //     debug: true
+        // }),
     ]
 };
