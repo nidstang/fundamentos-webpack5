@@ -10,7 +10,9 @@ module.exports = {
         filename: 'main.[contenthash].js',
     }, 
 
-    devtool: 'hidden-source-map',
+    devServer: {
+        port: 3000,
+    },
 
     module: {
         rules: [

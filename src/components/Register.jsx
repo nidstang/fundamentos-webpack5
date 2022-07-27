@@ -29,7 +29,6 @@ export default ({ onNew }) => {
         ev.preventDefault();
         updateSetsInfo({...setsInfo, [count + 1]: Side.empty() });
         setCount(c => c + 1);
-        throw new Error('Broken');
     };
 
     const onNewSet = ev => {
