@@ -5,8 +5,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
-const package = require('./package.json');
-
 const deps = require('./package.json').dependencies;
 
 module.exports = (env) => ({
@@ -14,23 +12,6 @@ module.exports = (env) => ({
     output: {
         filename: '[name].[contenthash].js',
         publicPath: 'http://localhost:3000/'
-    },
-
-    optimization: {
-        // splitChunks: {
-        //     chunks: 'all',
-
-        //     cacheGroups: {
-        //         vendors: {
-        //             name: 'vendors',
-        //             test: /[\\/]node_modules[\\/]/,
-        //         }
-        //     }
-        // },
-
-        // runtimeChunk: {
-        //     name: 'runtime',
-        // }
     },
 
     module: {
@@ -64,20 +45,11 @@ module.exports = (env) => ({
                 type: 'asset/source',
             },
 
-            // {
-            //     test: /\.(png|ttf)$/,
-            //     type: 'asset/inline', // no genera ninguno
-            // }
-
             {
                 test: /\.png$/,
-                type: 'asset' // solo mete el logo
+                type: 'asset' 
             },
 
-            // {
-            //     test: /\.png$/,
-            //     type: 'asset/inline'
-            // },
         ]
     },
 
@@ -98,27 +70,11 @@ module.exports = (env) => ({
         port: 3000,
     },
 
-    // devtool: 'eval-cheap-source-map', // development: build ok, rebuild fast -> transformed code, buena info stack
-    // devtool: 'eval-cheap-module-source-map', // development: build slow, rebuild fast -> original code
-    // devtool: 'hidden-source-map', // production: build slowest, rebuild slowest -> se carga pero no se referencia
-    // devtool: 'source-map', // production: build slowest, rebuild slowest -> genera fichero aparte
-
     plugins: [
         new HtmlWebpackPlugin({
             title: 'My App',
             template: path.resolve('index.html'),
-            // scriptLoading: 'blocking',
             meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
-        }),
-
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'assets/*',
-                    to: 'files/[name].[contenthash].[ext]',
-                    context: 'src/'
-                }
-            ]
         }),
 
         new MiniCssExtractPlugin({
@@ -129,26 +85,25 @@ module.exports = (env) => ({
             name: 'toset',
             filename: 'remoteEntry.js',
 
+            // toset/Register
+
             exposes: {
                 './Register': './src/components/Register.jsx',
                 './Styles': './src/styles.js',
             },
 
             shared: {
-                'react-dom': {
-                    singleton: true,
-                    requiredVersion: deps['react-dom'],
-                },
-
                 react: {
                     singleton: true,
                     requiredVersion: deps.react,
                 },
-            },
-        }),
 
-        // new HashInfoPlugin({
-        //     fileName: 'data.json',
-        // }),
+                'react-dom': {
+                    singleton: true,
+                    requiredVersion: deps['react-dom'],
+                }
+            }
+
+        }),
     ],
 });
