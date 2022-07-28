@@ -14,26 +14,35 @@ module.exports = (env, argv) => ({
         splitChunks: {
             chunks: 'all',
 
+            minSize: 0, // ultimo
+            maxInitialRequests: Infinity,
+
             cacheGroups: {
                 vendors: {
-                    minSize: 1000, // el tamaño minimo para que se cree un chunk
-                    name: 'vendors',
-                    priority: 1,
                     test: /[\\/]node_modules[\\/]/,
-                },
-
-                react: {
-                    name: 'react',
-                    priority: 2,
-                    test: /[\\/]node_modules[\\/](react|react-dom)/,
-                },
-
-                asyncModules: {
-                    minSize: 0,
-                    name: 'dynamic',
-                    priority: 3,
-                    chunks: 'async',
+                        name: module => {
+                            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                            return `npm.${packageName}`;
+                        },
                 }
+                // vendors: {
+                //     minSize: 1000, // el tamaño minimo para que se cree un chunk
+                //     name: 'vendors',
+                //     priority: 1,
+                //     test: /[\\/]node_modules[\\/]/,
+                // },
+
+                // react: {
+                //     name: 'react',
+                //     priority: 2,
+                //     test: /[\\/]node_modules[\\/](react|react-dom)/,
+                // },
+
+                // asyncModules: {
+                //     // minSize: 0,
+                //     name: 'dynamic',
+                //     chunks: 'async',
+                // }
 
                 // react: {
                 //     name: 'react',
