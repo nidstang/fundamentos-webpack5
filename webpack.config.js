@@ -9,8 +9,25 @@ module.exports = (env, argv) => {
         // mode: 'development', // none | development | production
         entry: path.resolve('src', 'app.js'),
 
+        optimization: {
+            splitChunks: {
+                chunks: 'all', // initial | async | all
+
+                cacheGroups: {
+                    vendors: {
+                        name: 'vendors',
+                        test: /[\\/]node_modules[\\/]/,
+                    }
+                }
+            },
+
+            runtimeChunk: {
+                name: 'runtime',
+            }
+        },
+
         output: {
-            filename: 'main.[contenthash].js',
+            filename: '[name].[contenthash].js',
         }, 
 
         devServer: {
