@@ -1,10 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const HashInfoPlugin = require('./plugins/HashInfoPlugin');
 
 module.exports = (env, argv) => {
-    console.log(env);
     return {
         // mode: 'development', // none | development | production
         entry: path.resolve('src', 'app.js'),
@@ -15,6 +15,9 @@ module.exports = (env, argv) => {
 
         devServer: {
             port: 3000,
+            client: {
+                overlay: false,
+            }
         },
 
         module: {
@@ -37,7 +40,7 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(css|scss)$/,
                     use: [
-                        'style-loader',
+                        argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
                         'css-loader',
                         'sass-loader',
                     ],
@@ -69,6 +72,10 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 title: 'ToSet',
                 template: path.resolve('index.html'),
+            }),
+
+            new MiniCssExtractPlugin({
+                filename: 'styles.[contenthash].css'
             }),
 
             // new CopyWebpackPlugin({
